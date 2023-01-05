@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/B6238285/se-65-team12/controller"
 	"github.com/B6238285/se-65-team12/entity"
 	"github.com/B6238285/se-65-team12/middlewares"
 	"github.com/gin-gonic/gin"
@@ -19,13 +20,15 @@ func main() {
 	{
 		router.Use(middlewares.Authorizes())
 		{
-
+			router.GET("/bills", controller.ListPatient)
+			router.GET("/bill/:id", controller.GetPatient)
+			router.POST("/createbills", controller.UpdatePatient)
 		}
 	}
 	// // Signup User Route
-	//r.POST("/signup", controller.CreateUser)
+	r.POST("/signup", controller.CreateLoginUser)
 	// // login User Route
-	//r.POST("/login", controller.Login)
+	r.POST("/login", controller.Login)
 
 	// Run the server go run main.go
 	//r.Run("localhost: " + PORT)
