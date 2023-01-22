@@ -84,15 +84,15 @@ func GetRoleName(id uint) string {
 	tx := entity.DB().Preload("Role").First(&rn, id)
 	if tx.Error != nil {
 		return "Role not found"
-	} else if rn.Role == "Doctor" {
+	} else if rn.Role.Name == "Doctor(แพทย์)" {
 		return "Doctor"
-	} else if rn.Role == "Nurse" {
+	} else if rn.Role.Name == "Nurse(พยาบาล)" {
 		return "Nurse"
-	} else if rn.Role == "Human Resourse" {
-		return "Human Resourse"
-	} else if rn.Role == "Accounting" {
+	} else if rn.Role.Name == "Human Resourse(ฝ่ายบุคคล)" {
+		return "HumanResourse"
+	} else if rn.Role.Name == "Accounting(ฝ่ายการเงิน)" {
 		return "Accounting"
-	} else if rn.Role == "Pharmacist" {
+	} else if rn.Role.Name == "Pharmacist(เภสัชกร)" {
 		return "Pharmacist"
 	}
 

@@ -30,9 +30,12 @@ func SetupDatabase() {
 	// Migrate the schema
 
 	database.AutoMigrate(
+		&Department{},
+		&Role{},
+		&Employee{},
+		&Gender{},
 		&PatientType{},
 		&PatientRight{},
-		&Gender{},
 		&Employee{},
 		&Patient{},
 	)
@@ -45,6 +48,185 @@ func SetupDatabase() {
 	password4, _ := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 	password5, _ := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 
+	// ทำการเพิ่ม Dummy Role ผู้ดูแลระบบ
+	admin1 := Role{
+		Name: "Doctor(แพทย์)",
+	}
+	db.Model(&Role{}).Create(&admin1)
+
+	admin2 := Role{
+		Name: "Nurse(พยาบาล)",
+	}
+	db.Model(&Role{}).Create(&admin2)
+
+	admin3 := Role{
+		Name: "Human Resourse(ฝ่ายบุคคล)",
+	}
+	db.Model(&Role{}).Create(&admin3)
+
+	admin4 := Role{
+		Name: "Accounting(ฝ่ายการเงิน)",
+	}
+	db.Model(&Role{}).Create(&admin4)
+
+	admin5 := Role{
+		Name: "Pharmacist(เภสัชกร)",
+	}
+	db.Model(&Role{}).Create(&admin5)
+
+	// ทำการเพิ่ม Dummy gender ผู้ดูแลระบบ
+	gender1 := Gender{
+		Name: "Men(ชาย)",
+	}
+	db.Model(&Gender{}).Create(&gender1)
+
+	gender2 := Gender{
+		Name: "Women(หญิง)",
+	}
+	db.Model(&Gender{}).Create(&gender2)
+
+	// ทำการเพิ่ม Dummy department ผู้ดูแลระบบ
+	dep1 := Department{
+		Type: "Emergency Room (แผนกฉุกเฉินและอุบัติเหตุ)",
+	}
+	db.Model(&Department{}).Create(&dep1)
+
+	dep2 := Department{
+		Type: "Radiology Department (แผนกรังสีกรรม)",
+	}
+	db.Model(&Department{}).Create(&dep2)
+
+	dep3 := Department{
+		Type: "Surgical Department (แผนกศัลยกรรม)",
+	}
+	db.Model(&Department{}).Create(&dep3)
+
+	dep4 := Department{
+		Type: "Department of Anaesthesia (แผนกวิสัญญี)",
+	}
+	db.Model(&Department{}).Create(&dep4)
+
+	dep5 := Department{
+		Type: "Pediatrics Department (แผนกกุมารเวชกรรม)",
+	}
+	db.Model(&Department{}).Create(&dep5)
+
+	dep6 := Department{
+		Type: "Obstretic (แผนกสูตินรีเวชกรรม)",
+	}
+	db.Model(&Department{}).Create(&dep6)
+
+	dep7 := Department{
+		Type: "Physical Therapy Department (แผนกเวชศาสตร์ฟื้นฟู)",
+	}
+	db.Model(&Department{}).Create(&dep7)
+
+	dep8 := Department{
+		Type: "Medicine Department (แผนกอายุรกรรม)",
+	}
+	db.Model(&Department{}).Create(&dep8)
+
+	dep9 := Department{
+		Type: "Ophthalmology Department (แผนกจักษุ)",
+	}
+	db.Model(&Department{}).Create(&dep9)
+
+	dep10 := Department{
+		Type: "Ear nose and throat Department (แผนกหู คอ จมูก)",
+	}
+	db.Model(&Department{}).Create(&dep10)
+
+	dep11 := Department{
+		Type: "Phamarceutical Department (แผนกเภสัชกรรม)",
+	}
+	db.Model(&Department{}).Create(&dep11)
+
+	dep12 := Department{
+		Type: "Psychology Department (แผนกจิตเวช)",
+	}
+	db.Model(&Department{}).Create(&dep12)
+
+	dep13 := Department{
+		Type: "Human and Resourse (แผนกฝ่ายบุคคล)",
+	}
+	db.Model(&Department{}).Create(&dep13)
+
+	dep14 := Department{
+		Type: "Finance Department (แผนกฝ่ายการเงิน)",
+	}
+	db.Model(&Department{}).Create(&dep14)
+
+	// ทำการเพิ่ม Dummy ข้อมูล ผู้ดูแลระบบ
+	emp1 := Employee{
+		FirstName:  "preechapat",
+		LastName:   "anpanit",
+		Civ:        "1250008896345",
+		Phone:      "0811111111",
+		Email:      "preechapat@mail.com",
+		Password:   string(password1),
+		Address:    "45 บ้านฟ้าปิยรมณ์ ต.บึงคำพร้อย อ.ลำลูกกาจ.ปทุมธานี 11350",
+		Role:       admin1,
+		Department: dep3,
+		Gender:     gender2,
+	}
+	db.Model(&Employee{}).Create(&emp1)
+
+	emp2 := Employee{
+		FirstName:  "aam",
+		LastName:   "love",
+		Civ:        "1234567890124",
+		Phone:      "0899999999",
+		Email:      "kawin@mail.com",
+		Password:   string(password2),
+		Address:    "37/123 บ้านหนองพิลุม ต.บ้านท่า อ.เมือง จ.ปราจีนบุรี 12150",
+		Role:       admin3,
+		Department: dep13,
+		Gender:     gender2,
+	}
+	db.Model(&Employee{}).Create(&emp2)
+
+	emp3 := Employee{
+		FirstName:  "sirinya",
+		LastName:   "kotpanya",
+		Civ:        "1258896675256",
+		Phone:      "0633333333",
+		Email:      "sirinya@mail.com",
+		Password:   string(password3),
+		Address:    "23/777 บ้านหนองบึง ต.ท่าช้าง อ.เมือง จ.ลพบุรี 13000",
+		Role:       admin2,
+		Department: dep2,
+		Gender:     gender2,
+	}
+	db.Model(&Employee{}).Create(&emp3)
+
+	emp4 := Employee{
+		FirstName:  "poramate",
+		LastName:   "jitlamom",
+		Civ:        "1234445678055",
+		Phone:      "0432536678",
+		Email:      "poramate@mail.com",
+		Password:   string(password4),
+		Address:    "56/77 บ้านตาก ต.หนองคุ้ม อ.ระงัน จ.ระยอง 13500",
+		Role:       admin5,
+		Department: dep11,
+		Gender:     gender2,
+	}
+	db.Model(&Employee{}).Create(&emp4)
+
+	emp5 := Employee{
+		FirstName:  "siwana",
+		LastName:   "julaiwarnsutti",
+		Civ:        "1274563346856",
+		Phone:      "0456673256",
+		Email:      "siwa@mail.com",
+		Password:   string(password5),
+		Address:    "324 ฟาร์มโชคชัย ต.โชคชัย อ.เมือง จ.นครราชศรีมา 12300",
+		Role:       admin4,
+		Department: dep14,
+		Gender:     gender2,
+	}
+	db.Model(&Employee{}).Create(&emp5)
+	////////////////////////////////////////////////////////////////////////////
 	patienttype1 := PatientType{
 		Type: "ปกติ",
 	}
@@ -80,94 +262,14 @@ func SetupDatabase() {
 	}
 	db.Model(&PatientRight{}).Create(&patientright3)
 
-	male := Gender{
-		Identity: "ชาย",
-	}
-	db.Model(&Gender{}).Create(&male)
-
-	female := Gender{
-		Identity: "หญิง",
-	}
-	db.Model(&Gender{}).Create(&female)
-
-	doctor := Employee{
-		FirstName:  "preechapat",
-		LastName:   "anpanit",
-		Civ:        "1250008896345",
-		Phone:      "0811111111",
-		Email:      "preechapat@mail.com",
-		Password:   string(password1),
-		Address:    "45 บ้านฟ้าปิยรมณ์ ต.บึงคำพร้อย อ.ลำลูกกา จ.ปทุมธานี 11350",
-		Role:       "Doctor",
-		Department: "Surgical Department",
-		Gender:     "Women",
-	}
-	db.Model(&Employee{}).Create(&doctor)
-
-	humanresourse := Employee{
-		FirstName:  "aam",
-		LastName:   "love",
-		Civ:        "1234567890124",
-		Phone:      "0899999999",
-		Email:      "kawin@mail.com",
-		Password:   string(password2),
-		Address:    "37/123 บ้านหนองพิลุม ต.บ้านท่า อ.เมือง จ.ปราจีนบุรี 12150",
-		Role:       "Human Resourse",
-		Department: "Radiology Department",
-		Gender:     "Women",
-	}
-	db.Model(&Employee{}).Create(&humanresourse)
-
-	nurse := Employee{
-		FirstName:  "sirinya",
-		LastName:   "kotpanya",
-		Civ:        "1258896675256",
-		Phone:      "0633333333",
-		Email:      "sirinya@mail.com",
-		Password:   string(password3),
-		Address:    "23/777 บ้านหนองบึง ต.ท่าช้าง อ.เมือง จ.ลพบุรี 13000",
-		Role:       "Nurse",
-		Department: "Human and Resourse",
-		Gender:     "Women",
-	}
-	db.Model(&Employee{}).Create(&nurse)
-
-	pharmacist := Employee{
-		FirstName:  "poramate",
-		LastName:   "jitlamom",
-		Civ:        "1234445678055",
-		Phone:      "0432536678",
-		Email:      "poramate@mail.com",
-		Password:   string(password4),
-		Address:    "56/77 บ้านตาก ต.หนองคุ้ม อ.ระงัน จ.ระยอง 13500",
-		Role:       "Pharmacist",
-		Department: "Phamarceutical Department",
-		Gender:     "Women",
-	}
-	db.Model(&Employee{}).Create(&pharmacist)
-
-	accounting := Employee{
-		FirstName:  "siwana",
-		LastName:   "julaiwarnsutti",
-		Civ:        "1274563346856",
-		Phone:      "0456673256",
-		Email:      "siwa@mail.com",
-		Password:   string(password5),
-		Address:    "324 ฟาร์มโชคชัย ต.โชคชัย อ.เมือง จ.นครราชศรีมา 12300",
-		Role:       "Accounting",
-		Department: "Finance Department",
-		Gender:     "Women",
-	}
-	db.Model(&Employee{}).Create(&accounting)
-
 	patient1 := Patient{
 		Civ:          "1309902756650",
 		FirstName:    "paramet",
 		LastName:     "chitlamom",
 		PatientType:  patienttype1,
-		Employee:     nurse,
+		Employee:     emp3,
 		PatientRight: patientright1,
-		Gender:       male,
+		Gender:       gender1,
 		Age:          22,
 		Weight:       56.23,
 		Brithdate:    time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
@@ -181,9 +283,9 @@ func SetupDatabase() {
 		FirstName:    "parama",
 		LastName:     "chitlamom",
 		PatientType:  patienttype2,
-		Employee:     nurse,
+		Employee:     emp3,
 		PatientRight: patientright2,
-		Gender:       female,
+		Gender:       gender2,
 		Age:          26,
 		Weight:       56.20,
 		Underlying:   "หอบหืด",
