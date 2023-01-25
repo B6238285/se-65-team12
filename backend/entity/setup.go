@@ -38,6 +38,8 @@ func SetupDatabase() {
 		&PatientRight{},
 		&Employee{},
 		&Patient{},
+		&Medicine{},
+		&Prescription{},
 	)
 
 	db = database
@@ -293,5 +295,68 @@ func SetupDatabase() {
 		PatientTime:  time.Date(2002, 12, 12, 0, 0, 0, 0, time.UTC),
 	}
 	db.Model(&Patient{}).Create(&patient2)
+
+	// ทำการเพิ่ม Dummy ข้อมูล ยา
+	drug1 := Medicine{
+		Drug: "-",
+		Cost: 0,
+	}
+	db.Model(&Medicine{}).Create(&drug1)
+
+	drug2 := Medicine{
+		Drug: "พาราเซตามอล",
+		Cost: 100,
+	}
+	db.Model(&Medicine{}).Create(&drug2)
+
+	drug3 := Medicine{
+		Drug: "อะม็อกซีซิลลิน",
+		Cost: 110,
+	}
+	db.Model(&Medicine{}).Create(&drug3)
+
+	drug4 := Medicine{
+		Drug: "น้ำมันตับปลา",
+		Cost: 90,
+	}
+	db.Model(&Medicine{}).Create(&drug4)
+
+	drug5 := Medicine{
+		Drug: "วิตามิน C",
+		Cost: 50,
+	}
+	db.Model(&Medicine{}).Create(&drug5)
+
+	drug6 := Medicine{
+		Drug: "ยาฆ่าเชื้อ",
+		Cost: 70,
+	}
+	db.Model(&Medicine{}).Create(&drug6)
+
+	drug7 := Medicine{
+		Drug: "ยาแก้แพ้",
+		Cost: 80,
+	}
+	db.Model(&Medicine{}).Create(&drug7)
+
+	prescription1 := Prescription{
+		Patient:    patient1,
+		Medicine:   drug2,
+		Employee:   emp4,
+		Order:      emp1,
+		Annotation: "รับประทานหลังอาหารครั้งละ 1 เม็ด",
+		ScriptTime: time.Date(2002, 12, 12, 0, 0, 0, 0, time.UTC),
+	}
+	db.Model(&Prescription{}).Create(&prescription1)
+
+	prescription2 := Prescription{
+		Patient:    patient2,
+		Medicine:   drug5,
+		Employee:   emp4,
+		Order:      emp1,
+		Annotation: "รับประทานก่อนอาหารครั้งละ 1 เม็ด",
+		ScriptTime: time.Date(2002, 12, 12, 0, 0, 0, 0, time.UTC),
+	}
+	db.Model(&Prescription{}).Create(&prescription2)
 
 }
