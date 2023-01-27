@@ -22,7 +22,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Container from "@mui/material/Container";
 import Home from './components/Home';
-
+import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
+import Patient from './components/Patient/PatientList';
+import PatientCreate from './components/Patient/PatientCreate';
+import PatientEdit from './components/Patient/PatientEdit';
+import Prescription from './components/Prescription/PrescriptionList';
+import PrescriptionDelete from './components/Prescription/PrescriptionDelete';
+import PrescriptionCreate from './components/Prescription/PrescriptionCreate';
+import PrescriptionEdit from './components/Prescription/PrescriptionEdit';
 const drawerWidth = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -76,10 +83,10 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const menu = [
-  { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,role: "Nurse"},
-  { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,role: "Nurse"},
+  { name: "หน้าแรก", icon: <HomeIcon />, path: "/", role: "Nurse"}, 
+  { name: "ลงทะเบียนผู้ป่วย", icon: <MenuBookRoundedIcon />, path: "/patients/list" ,role: "Nurse"},
   //{ name: "ลงทะเบียนหนังสือ", icon: <MenuBookRoundedIcon />, path: "/books",role: "admin"},
-  //{ name: "ลงทะเบียนสมาชิก", icon: <PeopleIcon />, path: "/users",role: "admin"},
+  { name: "ใบสั่งยา", icon: <MenuBookRoundedIcon/>, path: "/prescription/list",role: "Nurse"},
   //{ name: "จองห้องค้นคว้า", icon: <MeetingRoomIcon />, path: "/researchroomreservationrecords" ,role: "user"},
   //{ name: "จองเข้าใช้คอมพิวเตอร์", icon: <ComputerIcon />, path: "/computer_reservations" ,role: "user"},
   //{ name: "ยืมหนังสือ", icon: <AddCircleIcon />, path: "/borrows",role: "admin" },
@@ -149,7 +156,7 @@ function App() {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                ระบบห้องสมุด
+                ระบบจัดการผู้ป่วยใน
               </Typography>
               <Button color="inherit" onClick={signout}>
                 ออกจากระบบ
@@ -204,7 +211,13 @@ function App() {
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
               <Routes>
                 <Route path="/" element={<Home/>} />
-                
+                <Route path="/patients/list" element={<Patient/>} />
+                <Route path="/patient/create" element={<PatientCreate/>} />
+                <Route path="/patient/edit" element={<PatientEdit/>} />
+                <Route path="/prescription/list" element={<Prescription/>} />
+                <Route path="/prescription/delete" element={<PrescriptionDelete/>} />
+                <Route path="/prescription/create" element={<PrescriptionCreate/>} />
+                <Route path="/prescription/edit" element={<PrescriptionEdit/>} />
               </Routes>
             </Container>
           </Box>

@@ -11,7 +11,7 @@ function Home() {
     <Container maxWidth="md">
 
     <Typography variant="h1" gutterBottom>
-        Welcome to library
+        ระบบจัดการผู้ป่วยใน
       </Typography>
     </Container>
     
