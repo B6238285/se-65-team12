@@ -33,6 +33,7 @@ func main() {
 			router.POST("/prescription/create", controller.CreatePrescription)
 			router.PATCH("/prescription/edit", controller.UpdatePrescription)
 			router.DELETE("/prescription/delet/:id", controller.DeletePrescription)
+			router.GET("/employee/doctor/list", controller.ListEmployeeDoctor)
 			//ข้อมูล path patient_type//
 			router.GET("/patient/type/:id", controller.GetPatientType)
 			router.GET("/patient/types/list", controller.ListPatientType)

@@ -30,6 +30,9 @@ import Prescription from './components/Prescription/PrescriptionList';
 import PrescriptionDelete from './components/Prescription/PrescriptionDelete';
 import PrescriptionCreate from './components/Prescription/PrescriptionCreate';
 import PrescriptionEdit from './components/Prescription/PrescriptionEdit';
+import BoyIcon from '@mui/icons-material/Boy';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+
 const drawerWidth = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -84,9 +87,9 @@ const mdTheme = createTheme();
 
 const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/", role: "Nurse"}, 
-  { name: "ลงทะเบียนผู้ป่วย", icon: <MenuBookRoundedIcon />, path: "/patients/list" ,role: "Nurse"},
+  { name: "ลงทะเบียนผู้ป่วย", icon: <BoyIcon />, path: "/patients/list" ,role: "Nurse"},
   //{ name: "ลงทะเบียนหนังสือ", icon: <MenuBookRoundedIcon />, path: "/books",role: "admin"},
-  { name: "ใบสั่งยา", icon: <MenuBookRoundedIcon/>, path: "/prescription/list",role: "Nurse"},
+  { name: "ใบสั่งยา", icon: <ReceiptLongIcon/>, path: "/prescription/list",role: "Nurse"},
   //{ name: "จองห้องค้นคว้า", icon: <MeetingRoomIcon />, path: "/researchroomreservationrecords" ,role: "user"},
   //{ name: "จองเข้าใช้คอมพิวเตอร์", icon: <ComputerIcon />, path: "/computer_reservations" ,role: "user"},
   //{ name: "ยืมหนังสือ", icon: <AddCircleIcon />, path: "/borrows",role: "admin" },

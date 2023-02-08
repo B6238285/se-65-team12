@@ -38,11 +38,11 @@ function Patient() {
         { field: "Age", headerName: "อายุ", width: 150, valueFormatter: (params) => params.value.Age},        
         { field: "Weight", headerName: "น้ำหนัก", width: 150, valueFormatter: (params) => params.value.Weight},
         { field: "Underlying", headerName: "หมายเหตุ", width: 150, valueFormatter: (params) => params.value.Underlying},
+        { field: "PatientType", headerName: "ประเภทผู้ป่วย", width: 150, valueFormatter: (params) => params.value.Type},
+        { field: "PatientRight", headerName: "สิทธิ์ผู้ป่วย", width: 200, valueFormatter: (params) => params.value.Type},
         { field: "Brithdate", headerName: "วันเกิด", width: 250, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm:ss')},
         { field: "PatientTime", headerName: "วันที่และเวลา", width: 250, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm:ss')},
-        { field: "PatientType", headerName: "ประเภทผู้ป่วย", width: 150, valueFormatter: (params) => params.value.Type},
         { field: "Employee", headerName: "พยาบาล", width: 150, valueFormatter: (params) => params.value.FirstName + " " + params.value.LastName},
-        { field: "PatientRight", headerName: "สิทธิ์ผู้ป่วย", width: 150, valueFormatter: (params) => params.value.Type},
         { field: "Gender", headerName: "เพศ", width: 150, valueFormatter: (params) => params.value.Name},
         {
             field: " ",

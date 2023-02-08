@@ -20,7 +20,7 @@ import Button from "@mui/material/Button";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { PrescriptionInterface } from "../../interfaces/prescription/IPrescription";
 import { MedicineInterface } from "../../interfaces/prescription/IMedicine";
-import { CreatePrescription, ListMedicine } from "../../services/prescription/HttpClineServincePrescription";
+import { CreatePrescription, ListDoctor, ListMedicine } from "../../services/prescription/HttpClineServincePrescription";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -104,7 +104,7 @@ function PrescriptionCreate(){
       };
 
       const listOrder = async () => {
-        let res = await ListEmployees();
+        let res = await ListDoctor();
         if(res){
             setOrder(res);
         }
@@ -181,7 +181,43 @@ function PrescriptionCreate(){
             <Divider>
               <Grid container spacing={3} sx={{ padding: 2 }}>
 
-              <Grid item xs={6}>
+              <Grid item xs={12}>
+                  <FormControl fullWidth variant="outlined">
+                    <p>รายชื่อผู้ป่วย</p>
+                    <Select native value={prescription.PatientID + ""} onChange={handleChange} inputProps={{name: "PatientID", }}>
+                    <option aria-label="None" value="">
+                        เลือกผู้ป่วย
+                      </option>
+                      {patient.map((item: PatientInterface) => (
+                        <option value={item.ID} key={item.ID}>
+                          {(item.FirstName) +" " +(item.LastName)}
+                        </option>
+                      ))
+                      }
+                    </Select>
+                  </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+                  <FormControl fullWidth variant="outlined">
+                    <p>ยา</p>
+                    <Select native value={prescription.MedicineID + ""} onChange={handleChange} inputProps={{name: "MedicineID", }}>
+                      <option aria-label="None" value="0">
+                        เลือกยา
+                      </option>
+                      {medicine.map((item: MedicineInterface) => (
+                        <option value={item.ID} key={item.ID}>
+                          {item.Drug}
+                        </option>
+                      ))
+                      }
+                    </Select>
+                  </FormControl>
+                </Grid>
+        
+        
+        
+        <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
               <p>หมายเหตุ</p>
               <TextField
@@ -194,8 +230,28 @@ function PrescriptionCreate(){
                 onChange={handleInputChange}
               />
             </FormControl>
-          </Grid>    
+        </Grid>    
 
+        <Grid item xs={6}>
+                  <FormControl fullWidth variant="outlined">
+                    <p>ผู้สั่งจ่ายยา</p>
+                    <Select native value={prescription.OrderID + ""} onChange={handleChange} inputProps={{name: "OrderID", }}>
+                    <option aria-label="None" value="">
+                        เลือกผู้สั่งจ่ายยา
+                      </option>
+                      {order.map((item: EmployeeInterface) => (
+                        <option value={item.ID} key={item.ID}>
+                          {(item.FirstName) +" " +(item.LastName)}
+                        </option>
+                      ))
+                      }
+                    </Select>
+                  </FormControl>
+          </Grid>
+          
+          
+          
+          
           <Grid item xs={6}>
                   <FormControl fullWidth variant="outlined">
                     <p>วันที่และเวลา</p>
@@ -214,57 +270,12 @@ function PrescriptionCreate(){
                 </Grid>   
 
 
-          <Grid item xs={6}>
-                  <FormControl fullWidth variant="outlined">
-                    <p>ผู้ป่วย</p>
-                    <Select native value={prescription.PatientID + ""} onChange={handleChange} inputProps={{name: "PatientID", }}>
-                    <option aria-label="None" value="">
-                        เลือกผู้ป่วย
-                      </option>
-                      {patient.map((item: PatientInterface) => (
-                        <option value={item.ID} key={item.ID}>
-                          {(item.FirstName) +" " +(item.LastName)}
-                        </option>
-                      ))
-                      }
-                    </Select>
-                  </FormControl>
-          </Grid>
+          
 
           
-                <Grid item xs={6}>
-                  <FormControl fullWidth variant="outlined">
-                    <p>ยา</p>
-                    <Select native value={prescription.MedicineID + ""} onChange={handleChange} inputProps={{name: "MedicineID", }}>
-                      <option aria-label="None" value="0">
-                        เลือกยา
-                      </option>
-                      {medicine.map((item: MedicineInterface) => (
-                        <option value={item.ID} key={item.ID}>
-                          {item.Drug}
-                        </option>
-                      ))
-                      }
-                    </Select>
-                  </FormControl>
-                </Grid>
+                
 
-                <Grid item xs={6}>
-                  <FormControl fullWidth variant="outlined">
-                    <p>ผู้สั่งจ่ายยา</p>
-                    <Select native value={prescription.OrderID + ""} onChange={handleChange} inputProps={{name: "OrderID", }}>
-                    <option aria-label="None" value="">
-                        เลือกผู้สั่งจ่ายยา
-                      </option>
-                      {order.map((item: EmployeeInterface) => (
-                        <option value={item.ID} key={item.ID}>
-                          {(item.FirstName) +" " +(item.LastName)}
-                        </option>
-                      ))
-                      }
-                    </Select>
-                  </FormControl>
-          </Grid>
+            
 
                
                                  

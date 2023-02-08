@@ -239,6 +239,11 @@ function PatientEdit(){
                                 color="primary"
                                 fullWidth
                                 onChange={handleChangeTextField}
+                                onKeyPress={(e) => {
+                                    if (!/[0-9]/.test(e.key)){
+                                      e.preventDefault()
+                                    }
+                                  }}
                                 inputProps={{
                                     name: "Civ",
                                 }}
@@ -250,12 +255,17 @@ function PatientEdit(){
                             <Typography className='StyledTypography'> ชื่อ </Typography>
                             <TextField className='StyledTextField'
                                 autoComplete="off"
-                                id="Name"
+                                id="FirstName"
                                 variant="outlined"
                                 size="small"
                                 color="primary"
                                 fullWidth
                                 onChange={handleChangeTextField}
+                                onKeyPress={(e) => {
+                                    if (/[0-9]/.test(e.key)){
+                                      e.preventDefault()
+                                    }
+                                  }}
                                 inputProps={{
                                     name: "FirstName",
                                 }}
@@ -273,6 +283,11 @@ function PatientEdit(){
                                 color="primary"
                                 fullWidth
                                 onChange={handleChangeTextField}
+                                onKeyPress={(e) => {
+                                    if (/[0-9]/.test(e.key)){
+                                      e.preventDefault()
+                                    }
+                                  }}
                                 inputProps={{
                                     name: "LastName",
                                 }}
@@ -396,7 +411,7 @@ function PatientEdit(){
                         </FormControl>
                     </Grid>
                     <Grid item={true} xs={6}>
-                        <Typography className='StyledTypography'> หมายเหตุ </Typography>
+                        <Typography className='StyledTypography'> โรคประจำตัว </Typography>
                         <TextField className='StyledTextField'
                             autoComplete="off"
                             id="Name"

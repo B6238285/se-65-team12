@@ -17,7 +17,7 @@ import { PatientRightInterface } from "../../interfaces/patient/IPatientRight";
 import { EmployeeInterface } from "../../interfaces/employee/IEmployee";
 import { PrescriptionInterface } from "../../interfaces/prescription/IPrescription";
 import { MedicineInterface } from "../../interfaces/prescription/IMedicine";
-import { GetPrescription, ListMedicine, UpdatePrescription } from "../../services/prescription/HttpClineServincePrescription";
+import { GetPrescription, ListDoctor, ListMedicine, UpdatePrescription } from "../../services/prescription/HttpClineServincePrescription";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -75,15 +75,15 @@ function PrescriptionEdit(){
       const handleInputChangenumber = (
         event: React.ChangeEvent<{ id?: string; value: any }>
       ) => {
-        const id = event.target.id as keyof typeof patient;
+        const id = event.target.id as keyof typeof prescription;
         const { value } = event.target;
-        setPatient({ ...patient, [id]: value === "" ? "" : Number(value) });
+        setPrescription({ ...prescription, [id]: value === "" ? "" : Number(value) });
       };
 
       const handleChangeTextField = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const name = event.target.name as keyof typeof patient;
-        setPatient({
-            ...patient,
+        const name = event.target.name as keyof typeof prescription;
+        setPrescription({
+            ...prescription,
             [name]: event.target.value,
         });
 
@@ -118,7 +118,7 @@ function PrescriptionEdit(){
       };
 
       const listOrder = async () => {
-        let res = await ListEmployees();
+        let res = await ListDoctor();
         if(res){
             setOrder(res);
         }
@@ -225,25 +225,6 @@ function PrescriptionEdit(){
                 </Stack>
                 <Grid container spacing={2} >
                     <Grid item={true} xs={6}>
-                            <Typography className='StyledTypography'> หมายเหตุ </Typography>
-                            <TextField className='StyledTextField'
-                                autoComplete="off"
-                                id="Name"
-                                variant="outlined"
-                                size="small"
-                                color="primary"
-                                fullWidth
-                                onChange={handleChangeTextField}
-                                inputProps={{
-                                    name: "Annotation",
-                                }}
-                                value={prescription.Annotation}
-                            />
-                    </Grid>
-
-                   
-
-                    <Grid item={true} xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography className='StyledTypography'> ผู้ป่วย </Typography>
                             <Select
@@ -268,9 +249,10 @@ function PrescriptionEdit(){
                             </Select>
                         </FormControl>
                     </Grid>
-
                     
-
+                    
+                    
+                    
 
                     
                     
@@ -299,6 +281,25 @@ function PrescriptionEdit(){
                             </Select>
                         </FormControl>
                     </Grid>
+
+                                    
+                    <Grid item={true} xs={6}>
+                        <Typography className='StyledTypography'> หมายเหตุ </Typography>
+                        <TextField className='StyledTextField'
+                            autoComplete="off"
+                            id="Name"
+                            variant="outlined"
+                            size="small"
+                            color="primary"
+                            fullWidth
+                            onChange={handleChangeTextField}
+                            inputProps={{
+                                name: "Annotation",
+                            }}
+                            value={prescription.Annotation}
+                        />
+                    </Grid>
+
                     <Grid item={true} xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography className='StyledTypography'> ผู้สั่งยาจ่ายยา </Typography>
@@ -316,7 +317,7 @@ function PrescriptionEdit(){
                                 <option aria-label="None" value="">
                                     กรุณาเลือกผู้สั่งยาจ่ายย
                                 </option>
-                                {employee.map((item: EmployeeInterface) => (
+                                {order.map((item: EmployeeInterface) => (
                                     <option value={item.ID} key={item.ID}>
                                         {item.FirstName + " " + item.LastName}
                                     </option>
