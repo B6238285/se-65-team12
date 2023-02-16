@@ -87,9 +87,11 @@ async function CreatePrescription(data: PrescriptionInterface) {
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
-        return res.data;
+        //return res.data;
+        return { status: true, message: res.data };
       } else {
-        return false;
+        //return false;
+        return { status: false, message: res.error };
       }
     });
   
@@ -98,7 +100,7 @@ async function CreatePrescription(data: PrescriptionInterface) {
   }
 
 // Update Patient
-async function UpdatePrescription(pre : Partial<PrescriptionInterface>){
+async function UpdatePrescription(pre : PrescriptionInterface){
     let data = {
         ID: convertType(pre.ID),
         Annotation: pre.Annotation,
@@ -122,11 +124,15 @@ async function UpdatePrescription(pre : Partial<PrescriptionInterface>){
     let res = await fetch(`${apiUrl}/prescription/edit`, reqOpt)
     .then((response) => response.json())
     .then((res) => {
-        if(res){
-            return res
+        if(res.data){
+          //return res.data;
+          return { status: true, message: res.data };
+        } else {
+          //return false;
+          return { status: false, message: res.error };
         }
     })
-    return res
+    return res;
 }
 
 // Delete Patient

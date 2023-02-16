@@ -38,6 +38,7 @@ function PrescriptionEdit(){
 
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
+    const [message, setAlertMessage] = React.useState("");
 
     
 
@@ -158,10 +159,30 @@ function PrescriptionEdit(){
           
           // await รอจนกว่าจะมีการทำงานตามคำสั่งเสร็จ
           let res = await UpdatePrescription(data);
-          if (res) {
+          if (res.status) {
+            setAlertMessage("บันทึกข้อมูลสำเร็จ");
             setSuccess(true);
           } else {
+            setAlertMessage(res.message);
             setError(true);
+            if(res.message == "Annotation cannot be blank"){
+                setAlertMessage("กรุณากรอกข้อมูลช่องหมายเหตุ");
+              }
+              else if(res.message == "Annotation length is too long"){
+                setAlertMessage("รูปแบบไม่ถูกต้อง! ข้อความช่องหมายเหตุตัวอักษรเกิน 300 ตัว");
+              }
+              else if(res.message == "Annotation must have only character and number"){
+                setAlertMessage("รูปแบบไม่ถูกต้อง! ข้อมูลช่องหมายเหตุกรองได้เฉพาะตัวอักษรแล้วตัวเลข");
+              }
+              else if(res.message == "patient not found"){
+                setAlertMessage("กรุณาเลือกผู้ป่วย");
+              }
+              else if(res.message == "medicine not found"){
+                setAlertMessage("กรุณาเลือกชนิดยา");
+              }
+              else if(res.message == "order_by not found"){
+                setAlertMessage("กรุณาเลือกผู้สั่งจ่ายยา");
+              }
           }
           console.log(data);
   }
@@ -174,15 +195,9 @@ function PrescriptionEdit(){
                 open={success}
                 autoHideDuration={2000}
                 onClose={handleClose}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                sx={{ mt: 10 }}
-            >
-                <Alert
-                    onClose={handleClose}
-                    severity="success"
-                    sx={{ width: '100%', borderRadius: 3 }}
-                >
-                    อัพเดตข้อมูลสำเร็จ
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+                <Alert onClose={handleClose} severity="success" >
+                    {message}
                 </Alert>
             </Snackbar>
 
@@ -191,14 +206,10 @@ function PrescriptionEdit(){
                 autoHideDuration={2000}
                 onClose={handleClose}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                sx={{ mt: 10 }}
+                
             >
-                <Alert
-                    onClose={handleClose}
-                    severity="error"
-                    sx={{ width: '100%', borderRadius: 3 }}
-                >
-                    อัพเดตข้อมูลไม่สำเร็จ
+                <Alert onClose={handleClose} severity="error" >
+                    {message}
                 </Alert>
             </Snackbar>
             <Container
